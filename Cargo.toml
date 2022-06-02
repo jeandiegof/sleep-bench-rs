@@ -1,0 +1,10 @@
+[package]
+name = "sleep-bench"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pinscher = { git = "https://github.com/jeandiegof/pinscher" }
+csv = "1.1.6"
+serde = { version = "1.0", features = ["derive"] }
+clap = { version = "3.1.18", features = ["derive"] }
