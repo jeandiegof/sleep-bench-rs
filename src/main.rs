@@ -17,7 +17,7 @@ fn main() {
     let args = AppArgs::new();
     let mut csv_writer = Writer::from_path(args.output_filename()).unwrap();
 
-    for d in 1..=args.d_max() {
+    (1..=args.d_max()).for_each(|d| {
         println!("Running {}/{}", d, args.d_max());
 
         (0..args.runs()).for_each(|_| {
@@ -30,7 +30,7 @@ fn main() {
             let record = BenchRecord::new(d, cpu_time_bencher, energy_bencher);
             csv_writer.serialize(record).unwrap();
         });
+    });
 
-        csv_writer.flush().unwrap();
-    }
+    csv_writer.flush().unwrap();
 }
