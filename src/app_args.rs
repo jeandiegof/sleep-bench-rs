@@ -12,6 +12,10 @@ pub struct AppArgs {
     #[clap(short)]
     t: u64,
 
+    /// number of times to execute the function for each pair (t, d)
+    #[clap(short, long)]
+    runs: usize,
+
     /// File to save the csv output
     #[clap(short, long)]
     output_filename: String,
@@ -28,6 +32,10 @@ impl AppArgs {
 
     pub fn t(&self) -> u64 {
         self.t
+    }
+
+    pub fn runs(&self) -> usize {
+        self.runs
     }
 
     pub fn output_filename(&self) -> &str {

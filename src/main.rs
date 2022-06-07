@@ -20,15 +20,17 @@ fn main() {
     for d in 1..=args.d_max() {
         println!("Running {}/{}", d, args.d_max());
 
-        let mut cpu_time_bencher = CpuTimeBencher::new();
-        BenchSuite::bench(|| sleep(args.t(), d), &mut cpu_time_bencher).unwrap();
+        for _ in 0..args.runs() {
+            let mut cpu_time_bencher = CpuTimeBencher::new();
+            BenchSuite::bench(|| sleep(args.t(), d), &mut cpu_time_bencher).unwrap();
 
-        let mut energy_bencher = EnergyBencher::new().unwrap();
-        BenchSuite::bench(|| sleep(args.t(), d), &mut energy_bencher).unwrap();
+            let mut energy_bencher = EnergyBencher::new().unwrap();
+            BenchSuite::bench(|| sleep(args.t(), d), &mut energy_bencher).unwrap();
 
-        let record = BenchRecord::new(d, cpu_time_bencher, energy_bencher);
+            let record = BenchRecord::new(d, cpu_time_bencher, energy_bencher);
+            csv_writer.serialize(record).unwrap();
+        }
 
-        csv_writer.serialize(record).unwrap();
         csv_writer.flush().unwrap();
     }
 }
