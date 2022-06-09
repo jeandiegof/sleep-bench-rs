@@ -3,12 +3,12 @@ use clap::Parser;
 #[derive(Parser, Debug)]
 #[clap(author, version, about)]
 pub struct AppArgs {
-    /// Maximum value for the d parameter.
+    /// Maximum value for the d parameter in us
     /// The algorithm is executed from 1 to d_max.
     #[clap(short)]
     d_max: u64,
 
-    /// t parameter of the algorithm
+    /// Total duration in us
     #[clap(short)]
     t: u64,
 
